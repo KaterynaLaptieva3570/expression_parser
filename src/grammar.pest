@@ -1,0 +1,16 @@
+WHITESPACE = _{ " " | "\t" | "\n" }
+
+file   =  { SOI ~ expr ~ EOI }
+expr   =  { assign | sum }
+assign =  { ident ~ "=" ~ sum }
+sum    =  { product ~ ( (plus | minus) ~ product )* }
+product=  { atom ~ ( (mul | div) ~ atom )* }
+atom   =  { number | ident | "(" ~ expr ~ ")" }
+
+ident  =  @{ ASCII_ALPHA ~ (ASCII_ALPHANUMERIC | "_")* }
+number =  @{ "-"? ~ ASCII_DIGIT+ ~ ("." ~ ASCII_DIGIT+)? }
+
+plus   = { "+" }
+minus  = { "-" }
+mul    = { "*" }
+div    = { "/" }
