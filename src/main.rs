@@ -1,7 +1,7 @@
 use std::collections::HashMap;
 use std::io::{self, Write};
 
-use expression_parser::{parse_formula, eval}; // <-- імпортуємо з lib.rs
+use expression_parser::{parse_formula, eval}; 
 
 fn main() {
     print!("Введіть формулу (наприклад ROI = (R - C) / C * 100): ");
