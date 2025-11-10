@@ -34,8 +34,8 @@ This project demonstrates how to build a simple expression language parser in Ru
 - Multiplication	*	
 - Division	        /	
 - Parentheses	    ( )	
-- Exponentiation	^   // запланований функціонал
-- Summation         Σ   // запланований функціонал
+- Exponentiation	^   
+- Summation         Σ   
 
 ## Example Usage
 
