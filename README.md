@@ -12,6 +12,7 @@ This project demonstrates how to build a simple expression language parser in Ru
 - Uses a formal grammar (`.pest` file) to tokenize and parse it.
 - Constructs an Abstract Syntax Tree (AST) from the parsed tokens.
 - Recursively evaluates the AST using variable values from user input.
+- Supports both interactive and CLI execution modes.
 
 ## Features
 
@@ -43,7 +44,26 @@ Enter expression: result = (a + b) * (c - d / 2)<br>
 Enter variables: a=3 b=5 c=10 d=4<br>
 result = 68
 
-Enter expression: sum = Σk=1toN(k^a)<br>
-Enter variables: N=2 a=2<br>
+Enter expression: sum = Σk=1to2(k^a)<br>
+Enter variables: a=2<br>
 // 1^2 + 2^2 = 5<br>
 result = 5
+
+You can store a formula and its variables in a file: formula.txt:<br>
+ROI = (R - C) / C * 100<br>
+R=1500<br>
+C=1000
+
+cargo run -- parse formula.txt<br>
+
+Formula from file:<br>
+ROI = (R - C) / C * 100<br>
+ROI = 50
+
+## Display Help:<br>
+cargo run -- --help
+
+## Display Credits:<br>
+cargo run -- credits
+
+
