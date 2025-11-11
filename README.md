@@ -66,4 +66,29 @@ cargo run -- --help
 ## Display Credits:<br>
 cargo run -- credits
 
+## Parsing Logic Diagram
+
+```mermaid
+flowchart TD
+    A[User Input: Formula or File] --> B[Lexer & Parser (pest)]
+    B --> C[Parse Tree]
+    C --> D[AST Builder (parse_expr)]
+    D --> E[AST Evaluation]
+    E --> F[Variable Substitution]
+    F --> G[Final Computation Result]
+    G --> H[Output: Printed to Console]
+
+
+### How it works:
+- **A → B:** The input expression (e.g., `ROI = (R - C) / C * 100`) is parsed by Pest according to grammar rules.  
+- **B → C:** Pest generates a *parse tree* representing the structure of the expression.  
+- **C → D:** The program builds an **AST (Abstract Syntax Tree)** with `Expr` enums.  
+- **D → E:** The AST is recursively evaluated.  
+- **E → F:** Variable values from user input are substituted.  
+- **F → G → H:** The result is computed and displayed (e.g., `ROI = 50`).  
+
+This diagram helps readers quickly grasp how the parsing and evaluation flow from raw input to computed output.
+
+
+
 

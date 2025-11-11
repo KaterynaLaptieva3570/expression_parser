@@ -2,28 +2,40 @@ use pest::Parser;
 use pest_derive::Parser;
 use std::collections::HashMap;
 
+/// Parser generated from `grammar.pest`.
 #[derive(Parser)]
 #[grammar = "grammar.pest"]
 pub struct Grammar;
 
+/// AST node representing a parsed expression.
 #[derive(Debug)]
 pub enum Expr {
+    /// Number
     Num(f64),
+    /// Variable
     Var(String),
+    /// a + b
     Add(Box<Expr>, Box<Expr>),
+    /// a - b
     Sub(Box<Expr>, Box<Expr>),
+    /// a * b
     Mul(Box<Expr>, Box<Expr>),
+    /// a / b
     Div(Box<Expr>, Box<Expr>),
+    /// a ^ b
     Pow(Box<Expr>, Box<Expr>),
+    /// Σi=1toN(body)
     Sum {
         var: String,
         start: f64,
         end: f64,
         body: Box<Expr>,
     },
+    /// a = b + c
     Assign(Box<Expr>),
 }
 
+/// Builds an [`Expr`] tree from a parsed pair.
 pub fn parse_expr(pair: pest::iterators::Pair<Rule>) -> Expr {
     match pair.as_rule() {
         Rule::file | Rule::expr => parse_expr(pair.into_inner().next().unwrap()),
@@ -90,11 +102,16 @@ pub fn parse_expr(pair: pest::iterators::Pair<Rule>) -> Expr {
     }
 }
 
+/// Parses a formula string into an AST.
 pub fn parse_formula(expr_str: &str) -> Expr {
-    let pair = Grammar::parse(Rule::file, expr_str).unwrap().next().unwrap();
+    let pair = Grammar::parse(Rule::file, expr_str)
+        .unwrap()
+        .next()
+        .unwrap();
     parse_expr(pair)
 }
 
+/// Evaluates an expression using variable values.
 pub fn eval(e: &Expr, vars: &HashMap<String, f64>) -> f64 {
     match e {
         Expr::Num(x) => *x,
@@ -104,7 +121,12 @@ pub fn eval(e: &Expr, vars: &HashMap<String, f64>) -> f64 {
         Expr::Mul(a, b) => eval(a, vars) * eval(b, vars),
         Expr::Div(a, b) => eval(a, vars) / eval(b, vars),
         Expr::Pow(a, b) => eval(a, vars).powf(eval(b, vars)),
-        Expr::Sum { var, start, end, body } => {
+        Expr::Sum {
+            var,
+            start,
+            end,
+            body,
+        } => {
             let mut sum = 0.0;
             let mut new_vars = vars.clone();
             let s = *start as i64;

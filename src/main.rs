@@ -1,8 +1,8 @@
+use clap::{Parser, Subcommand};
+use expression_parser::{eval, parse_formula};
 use std::collections::HashMap;
 use std::fs;
 use std::io::{self, Write};
-use clap::{Parser, Subcommand};
-use expression_parser::{parse_formula, eval};
 
 #[derive(Parser)]
 #[command(author, version, about = "Expression Parser — CLI for parsing and evaluating mathematical formulas", long_about = None)]
@@ -27,8 +27,7 @@ fn main() {
 
     match cli.command {
         Some(Commands::Parse { file }) => {
-            let content = fs::read_to_string(&file)
-                .expect("Не вдалося прочитати файл");
+            let content = fs::read_to_string(&file).expect("Не вдалося прочитати файл");
 
             // Розділяємо рядки: перша — формула, решта — змінні
             let mut lines = content.lines().filter(|l| !l.trim().is_empty());
@@ -37,10 +36,10 @@ fn main() {
             // Зчитування змінних
             let mut vars = HashMap::new();
             for line in lines {
-                if let Some((k, v)) = line.split_once('=') {
-                    if let Ok(val) = v.trim().parse::<f64>() {
-                        vars.insert(k.trim().to_string(), val);
-                    }
+                if let Some((k, v)) = line.split_once('=')
+                    && let Ok(val) = v.trim().parse::<f64>()
+                {
+                    vars.insert(k.trim().to_string(), val);
                 }
             }
 
@@ -75,10 +74,10 @@ fn main() {
 
             let mut vars = HashMap::new();
             for part in vars_input.replace(',', " ").split_whitespace() {
-                if let Some((k, v)) = part.split_once('=') {
-                    if let Ok(val) = v.trim().parse::<f64>() {
-                        vars.insert(k.trim().to_string(), val);
-                    }
+                if let Some((k, v)) = part.split_once('=')
+                    && let Ok(val) = v.trim().parse::<f64>()
+                {
+                    vars.insert(k.trim().to_string(), val);
                 }
             }
 
