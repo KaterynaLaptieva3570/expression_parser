@@ -14,6 +14,13 @@ pub enum Expr {
     Sub(Box<Expr>, Box<Expr>),
     Mul(Box<Expr>, Box<Expr>),
     Div(Box<Expr>, Box<Expr>),
+    Pow(Box<Expr>, Box<Expr>),
+    Sum {
+        var: String,
+        start: f64,
+        end: f64,
+        body: Box<Expr>,
+    },
     Assign(Box<Expr>),
 }
 

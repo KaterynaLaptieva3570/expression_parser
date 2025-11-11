@@ -4,10 +4,10 @@ file   =  { SOI ~ expr ~ EOI }
 expr   =  { assign | sum }
 assign =  { ident ~ "=" ~ sum }
 sum    =  { product ~ ( (plus | minus) ~ product )* }
-product=  { atom ~ ( (mul | div) ~ atom )* }
+product =  { power ~ ( (mul | div) ~ power )* }
 power     =  { atom ~ ( pow ~ atom )* }
+atom   =  { number | ident | "(" ~ expr ~ ")" | summation }
 summation =  { sigma ~ ident ~ "=" ~ number ~ "to" ~ number ~ "(" ~ expr ~ ")" }
-atom   =  { number | ident | "(" ~ expr ~ ")" }
 
 ident  =  @{ ASCII_ALPHA ~ (ASCII_ALPHANUMERIC | "_")* }
 number =  @{ "-"? ~ ASCII_DIGIT+ ~ ("." ~ ASCII_DIGIT+)? }
