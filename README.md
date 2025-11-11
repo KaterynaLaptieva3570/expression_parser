@@ -66,3 +66,19 @@ cargo run -- --help
 ## Display Credits:<br>
 cargo run -- credits
 
+## Grammar Definition
+
+The parser uses a formal grammar written in [`pest`](https://pest.rs) syntax to define how formulas are recognized and parsed into an Abstract Syntax Tree (AST).
+
+```pest
+file      =  { SOI ~ expr ~ EOI }
+expr      =  { assign | summation | sum | product }
+assign    =  { ident ~ "=" ~ expr }
+summation =  { "Σ" ~ ident ~ "=" ~ number ~ "to" ~ number ~ "(" ~ expr ~ ")" }
+sum       =  { product ~ (("+" | "-") ~ product)* }
+product   =  { power ~ (("*" | "/") ~ power)* }
+power     =  { atom ~ ("^" ~ atom)* }
+atom      =  { number | ident | "(" ~ expr ~ ")" }
+number    =  @{ "-"? ~ ASCII_DIGIT+ ~ ("." ~ ASCII_DIGIT+)? }
+ident     =  @{ ASCII_ALPHA+ }
+
