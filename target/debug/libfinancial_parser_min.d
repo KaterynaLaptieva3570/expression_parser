@@ -1,1 +1,0 @@
-/Users/katerynalaptieva/Desktop/formula_parser/target/debug/libfinancial_parser_min.rlib: /Users/katerynalaptieva/Desktop/formula_parser/src/grammar.pest /Users/katerynalaptieva/Desktop/formula_parser/src/lib.rs
