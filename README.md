@@ -5,6 +5,8 @@
 
 **Main Idea:**  was to develop a reliable, extensible system for parsing and evaluating mathematical expressions using formal grammar definitions.  
 
+**Crates.io:** https://crates.io/crates/expression_parser/0.1.0
+
 ## Overview
 
 This project demonstrates how to build a simple expression language parser in Rust:
