@@ -4,6 +4,7 @@ version = "0.1.0"
 edition = "2024"
 description = "A minimal Rust parser and evaluator for arithmetic expressions with variables, built using the pest parsing library. It converts a text formula into an abstract syntax tree (AST) and computes the result based on user-provided variable values."
 readme = "README.md"
+license = "MIT"
 
 [dependencies]
 anyhow = "1"
