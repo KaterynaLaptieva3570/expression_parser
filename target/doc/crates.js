@@ -1,0 +1,2 @@
+window.ALL_CRATES = ["aho_corasick","anstream","anstyle","anstyle_parse","anstyle_query","anyhow","clap","clap_builder","clap_derive","clap_lex","colorchoice","expression_parser","heck","is_terminal_polyfill","memchr","pest","pest_derive","pest_generator","pest_meta","proc_macro2","quote","regex","regex_automata","regex_syntax","strsim","syn","ucd_trie","unicode_ident","utf8parse"];
+//{"start":21,"fragment_lengths":[14,11,10,16,16,9,7,15,14,11,14,20,7,23,9,7,14,17,12,14,8,8,17,15,9,6,11,16,12]}

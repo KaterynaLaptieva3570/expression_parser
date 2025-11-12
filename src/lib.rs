@@ -1,3 +1,45 @@
+//! # Expression Parser
+//! 
+//! A lightweight formula parsing and evaluation engine written in Rust.
+//!
+//! ## Grammar Overview
+//! Below are all grammar rules defined in `grammar.pest`.
+//!
+//! ```pest
+//! WHITESPACE = _{ " " | "\t" | "\n" }
+//! file       = { SOI ~ expr ~ EOI }
+//! expr       = { assign | sum }
+//! assign     = { ident ~ "=" ~ sum }
+//! sum        = { product ~ ((plus | minus) ~ product)* }
+//! product    = { power ~ ((mul | div) ~ power)* }
+//! power      = { atom ~ (pow ~ atom)* }
+//! atom       = { number | ident | "(" ~ expr ~ ")" | summation }
+//! summation  = { sigma ~ ident ~ "=" ~ number ~ "to" ~ number ~ "(" ~ expr ~ ")" }
+//! ident      = @{ ASCII_ALPHA ~ (ASCII_ALPHANUMERIC | "_")* }
+//! number     = @{ "-"? ~ ASCII_DIGIT+ ~ ("." ~ ASCII_DIGIT+)? }
+//! plus       = { "+" }
+//! minus      = { "-" }
+//! mul        = { "*" }
+//! div        = { "/" }
+//! pow        = { "^" }
+//! sigma      = { "Σ" }
+//! ```
+//!
+//! ## Rule Descriptions
+//! - **`WHITESPACE`** — skips spaces, tabs, and newlines.  
+//! - **`file`** — top-level parser entry (`SOI ~ expr ~ EOI`).  
+//! - **`expr`** — either an assignment or arithmetic expression.  
+//! - **`assign`** — variable assignment, e.g. `x = 2 + 3`.  
+//! - **`sum`** — addition/subtraction sequence, e.g. `2 + 3 - 1`.  
+//! - **`product`** — multiplication/division, e.g. `2 * 3 / 4`.  
+//! - **`power`** — exponentiation (right-associative).  
+//! - **`atom`** — atomic expressions: number, variable, parentheses, or Σ-summation.  
+//! - **`summation`** — mathematical Σ notation (`Σi=1to3(i^2)`).  
+//! - **`ident`** — valid identifier name (starts with letter, may include digits/underscores).  
+//! - **`number`** — integer or float (optionally negative).  
+//! - **Operators** — `+`, `-`, `*`, `/`, `^`, and `Σ`.
+//!
+
 use pest::Parser;
 use pest_derive::Parser;
 use std::collections::HashMap;

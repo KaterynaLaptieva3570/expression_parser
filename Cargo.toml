@@ -15,3 +15,10 @@ clap = { version = "4.5", features = ["derive"] }
 [dev-dependencies]
 pretty_assertions = "1.4"
 
+[lib]
+name = "expression_parser"
+path = "src/lib.rs"
+
+[package.metadata.docs.rs]
+all-features = true
+targets = ["x86_64-unknown-linux-gnu"]
