@@ -1,5 +1,5 @@
 //! # Expression Parser
-//! 
+//!
 //! A lightweight formula parsing and evaluation engine written in Rust.
 //!
 //! ## Grammar Overview

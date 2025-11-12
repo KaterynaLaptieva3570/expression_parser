@@ -1,6 +1,6 @@
-use std::collections::HashMap;
+use expression_parser::{eval, parse_formula};
 use pretty_assertions::assert_eq;
-use expression_parser::{parse_formula, eval};
+use std::collections::HashMap;
 
 // тест формул із пробілами
 #[test]
@@ -153,7 +153,6 @@ fn test_number_rule() {
     assert_eq!(result, 4.5);
 }
 
-
 // додаткові перевірки
 #[test]
 fn test_simple_addition() {
@@ -180,4 +179,3 @@ fn test_variables_usage() {
     let result = eval(&expr, &vars);
     assert_eq!(result, 11.0);
 }
-
